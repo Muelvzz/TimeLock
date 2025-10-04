@@ -1,0 +1,67 @@
+/* ---------- LANDING PAGE ---------- */
+.landing-page-container {
+  text-align: center;
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.landing-page-title {
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.landing-page-title > h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin: 0; /* 🔹 removes top and bottom spacing */
+  line-height: 1.2;
+}
+
+.landing-page-slogan {
+  margin-bottom: 2rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--thistle);
+  line-height: 1.5;
+}
+
+/* ---------- BUTTONS ---------- */
+.landing-page-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.landing-page-buttons > button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Button 1 (primary) */
+.landing-page-buttons > button:first-child {
+  background-color: var(--misty-rose);
+  color: black;
+}
+
+.landing-page-buttons > button:first-child:hover {
+  background-color: var(--pale-purple);
+  transform: translateY(-2px);
+}
+
+/* Button 2 (secondary) */
+.landing-page-buttons > button:last-child {
+  background-color: var(--lavender-web);
+  color: black;
+}
+
+.landing-page-buttons > button:last-child:hover {
+  background-color: var(--thistle);
+  color: white;
+  transform: translateY(-2px);
+}
