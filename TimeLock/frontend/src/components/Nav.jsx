@@ -9,8 +9,6 @@ export default function Nav() {
                 </ul>
                 <ul className="right-nav">
                     <li>About</li>
-                    <li>Sign-in</li>
-                    <li>Log-in</li>
                 </ul>
             </nav>
         </>

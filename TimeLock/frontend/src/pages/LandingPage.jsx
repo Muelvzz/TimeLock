@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import './css/landing-page.css';
-import Nav from './components/Nav';
+import '../css/landing-page.css';
+import Nav from '../components/Nav';
+import { Link } from 'react-router-dom'
 
 function LandingPage() {
   const [landingPageApi, setLandingPageApi] = useState(null);
@@ -54,7 +55,7 @@ function LandingPage() {
         </div>
 
         <div className="landing-page-buttons">
-          <button>Start Tracking For Free</button>
+          <button><Link to="/sign-up" >Start Tracking For Free</Link></button>
           <button>See How it Works</button>
         </div>
 

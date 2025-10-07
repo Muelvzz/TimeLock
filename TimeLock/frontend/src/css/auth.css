@@ -1,0 +1,158 @@
+.auth-page {
+    background-color: #0f0f1a;
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: radial-gradient(circle at 30% 20%, #2a2a40 0%, #0f0f1a 70%);
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.auth-box {
+    background-color: #1c1c2b;
+    padding: 3rem 4rem;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: clamp(300px, 50vw, 600px);
+    transition: all 0.3s ease;
+}
+
+.logo {
+    background-color: white;
+    width: clamp(80px, 20vw, 150px);
+    border-radius: 1rem;
+}
+
+/* Content */
+.form-section {
+    text-align: left;
+}
+
+.info-text {
+    color: #9fa3b0;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.rules {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.rules li {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+.valid {
+    color: lightgreen;
+}
+
+.invalid {
+    color: red;
+}
+
+/* Input + Button */
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #2d2d44;
+    color: white;
+    font-size: 0.95rem;
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background-color: #3b82f6;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.save-btn:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+.login-link {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* ---------------- RESPONSIVENESS ---------------- */
+
+/* Small phones (portrait) */
+@media (max-width: 480px) {
+    .auth-box {
+        padding: 2rem 1.5rem;
+        width: 90%;
+    }
+
+    .logo {
+        width: 40vw;
+        margin-bottom: 1.5rem;
+    }
+
+    .info-text {
+        font-size: 0.8rem;
+    }
+
+    .rules li {
+        font-size: 0.75rem;
+    }
+
+    .save-btn {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablets and small laptops */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .auth-box {
+        padding: 3rem 2.5rem;
+        width: 70%;
+    }
+
+    .logo {
+        width: 25vw;
+    }
+
+    .rules li {
+        font-size: 0.8rem;
+    }
+}
+
+/* Large desktop displays */
+@media (min-width: 1440px) {
+    .auth-box {
+        width: 40vw;
+        padding: 4rem 5rem;
+    }
+
+    .logo {
+        width: 12vw;
+    }
+}
