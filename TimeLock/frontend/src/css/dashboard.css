@@ -1,0 +1,194 @@
+.dashboard {
+  background-color: #1c1e26;
+  color: #e4e6eb;
+  min-height: 100vh;
+  padding: 1.5rem 2rem;
+  font-family: "Inter", sans-serif;
+}
+
+/* Header layout */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* allows wrapping for smaller screens */
+  gap: 1rem;
+}
+
+.header-left h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #f0f0f0;
+}
+
+.activity-input {
+  background: #2a2c34;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  color: #fff;
+  width: 300px;
+  max-width: 100%;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timer {
+  font-size: 1.1rem;
+}
+
+.play-btn {
+  background: #4a86ff;
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.remove-btn {
+  background: #ff7d4a;
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.play-btn:hover {
+  background: #3b6dd8;
+}
+
+/* Activity list */
+.activity-list h3 {
+  margin-bottom: 1rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.activity-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.activity-list li {
+  display: flex;
+  justify-content: space-between;
+  background: #2a2c34;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap; /* ensures text wraps neatly */
+}
+
+.activity-right-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.activity-label {
+  color: #f9fafb;
+  font-weight: 500;
+}
+
+.activity-time {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin-left: 0.8rem;
+}
+
+.activity-duration {
+  font-weight: 500;
+  color: #facc15;
+}
+
+/* ====== RESPONSIVE BREAKPOINTS ====== */
+
+/* Tablets (≤ 1024px) */
+@media (max-width: 1024px) {
+  .dashboard {
+    padding: 1.5rem;
+  }
+
+  .activity-input {
+    width: 250px;
+  }
+
+  .timer {
+    font-size: 1rem;
+  }
+
+  .activity-list li {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile Landscape & Small Tablets (≤ 768px) */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .activity-input {
+    width: 100%;
+  }
+
+  .header-right {
+    align-self: flex-end;
+  }
+
+  .activity-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .activity-duration {
+    align-self: flex-end;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile Portrait (≤ 480px) */
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
+  .header-left h2 {
+    font-size: 1rem;
+  }
+
+  .activity-input {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .play-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .activity-list li {
+    padding: 0.7rem 0.8rem;
+  }
+
+  .activity-duration {
+    font-size: 0.85rem;
+  }
+}

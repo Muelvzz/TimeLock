@@ -30,6 +30,9 @@ export default function Sign_up(){
 
                         <form action="">
                             <div className="input-group">
+                                <input type="text" placeholder="Create Username" required />
+                            </div>
+                            <div className="input-group">
                                 <input type="email" placeholder="Enter your email" required />
                             </div>
                             <div className="input-group">
