@@ -7,8 +7,18 @@ export default function Dashboard() {
   const [activity, setActivity] = useState([])
   const [activities, setActivities] = useState([])
   const [time, setTime] = useState(0)
+  const token = localStorage.getItem("token")
 
   let interval = useRef(null)
+
+  fetch("http://127.0.0.1:5000/dashboard", {
+    method: "GET",
+    headers: {
+      "Authorization": 'Bearer ${token}',
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
 
   useEffect(() => {
     if (isRunning) {
