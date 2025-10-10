@@ -5,20 +5,74 @@ from flask_cors import CORS
 auth_bp = Blueprint("auth", __name__)
 from server import mysql
 
-@auth_bp.route("/sign-up", methods=['GET', 'POST'])
+@auth_bp.route("/sign-up", methods=['POST'])
 def sign_up():
     data = request.get_json()
     if not data:
-        return jsonify({'error': 'No JSON received'}), 400
+        return jsonify({
+            'error': 'No JSON received'
+            }), 400
 
     username = data.get('username')
     email = data.get('email')
     password = data.get('password')
-    print(f"""
-          Flask received the following...
-          username = {username!s}
-          email = {email!s}
-          password = {password!s}
-""")
+    hashed_pw = generate_password_hash(password)
 
-    return jsonify({'status': 'received', 'user': {'username': username, 'email': email}}), 201
+    cursor = mysql.connection.cursor()
+
+    try:
+        cursor.execute(
+            'INSERT INTO users (username, email, password) VALUES (%s, %s, %s)', (username, email, hashed_pw)
+        )
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({
+            'status': 'received', 
+            'user': {
+                'username': username, 
+                'email': email
+                }
+            }), 201
+    
+    except Exception as e:
+        mysql.connection.rollback()
+        cursor.close()
+        return jsonify({
+            'error': str(e)
+        }), 500
+
+@auth_bp.route("/login", methods=['GET', 'POST'])
+def login():
+    data = request.get_json()
+    if not data:
+        return jsonify({
+            'error': 'No JSON received'
+        }), 400
+    
+    email = data.get('email')
+    password = data.get('password')
+
+    cursor = mysql.connection.cursor(dictionary=True)
+    cursor.execute('SELECT * FROM users WHERE = %s', (email,))
+    user = cursor.fetchone()
+    cursor.close()
+
+    if not user:
+        return jsonify({
+            'error': 'User not found'
+        }), 404
+    
+    if not check_password_hash(user['password'], password):
+        return jsonify({
+            'error': 'Incorrect password'
+        }), 401
+
+    return jsonify({
+        'status': 'received', 
+        'user': {
+            'email': email,
+            'password': password,
+            },
+        'message': 'Login request received successfully'
+        }), 201

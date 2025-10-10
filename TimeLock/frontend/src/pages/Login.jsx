@@ -8,53 +8,31 @@ export default function Login(){
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
-    fetch("http://127.0.0.1:5000/login", {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password,
-        }),
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.token) {
-                localStorage.setItem("token", data.token)
-                alert("Login successful!");
-            } else {
-                alert(data.error || "Login failed")
-            }
-        })
-
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
+        e.preventDefault()
+        const credentials = { email, password }
+        
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
+            const res = await fetch("http://127.0.0.1:5000/api/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(credentials),
+            })
 
-            const data = await response.json();
-
-            if (response.ok) {
-                alert('Login successful!');
-                // Clear form
-                setEmail("");
-                setPassword("");
-                // Redirect to dashboard
-                navigate('/dashboard');
-            } else {
-                alert(data.message || 'Login failed');
+            if (!res.ok) {
+                const errText = await res.text()
+                throw new Error(errText || res.statusText)
             }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Something went wrong, try again later');
+
+            const data = await res.json()
+            console.log(`Server response: ${data}`)
+            setStatus("Signup sent ✔");
+
+        } catch (err) {
+            console.error(`Signup error: ${err}`)
+            setStatus(`Error: ${err.message}`)
         }
-    };
+    }
 
 
     return (
