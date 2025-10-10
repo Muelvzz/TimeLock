@@ -33,10 +33,16 @@ export default function Sign_up(){
             if (!res.ok) {
                 const errText = await res.text()
                 throw new Error(errText || res.statusText)
+                setUsername("")
+                setEmail("")
+                setPassword("")
+                setStatus("Signup successful")
             }
 
             const data = await res.json()
-            console.log(`Server response: ${data}`)
+            navigate(data.redirect)
+
+            console.log(`Server response: `, data)
             setStatus("Signup sent ✔");
 
         } catch (err) {

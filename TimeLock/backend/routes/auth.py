@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, request, jsonify, Blueprint, redirect, url_for
+from MySQLdb.cursors import DictCursor
 from flask_cors import CORS
 
 auth_bp = Blueprint("auth", __name__)
@@ -32,7 +33,8 @@ def sign_up():
             'user': {
                 'username': username, 
                 'email': email
-                }
+                },
+            'redirect': '/dashboard'
             }), 201
     
     except Exception as e:
@@ -42,37 +44,29 @@ def sign_up():
             'error': str(e)
         }), 500
 
-@auth_bp.route("/login", methods=['GET', 'POST'])
+@auth_bp.route("/login", methods=['POST'])
 def login():
     data = request.get_json()
     if not data:
-        return jsonify({
-            'error': 'No JSON received'
-        }), 400
-    
+        return jsonify({'error': 'No JSON received'}), 400
+
     email = data.get('email')
     password = data.get('password')
 
-    cursor = mysql.connection.cursor(dictionary=True)
-    cursor.execute('SELECT * FROM users WHERE = %s', (email,))
+    cursor = mysql.connection.cursor(DictCursor)
+    cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
     user = cursor.fetchone()
     cursor.close()
 
     if not user:
-        return jsonify({
-            'error': 'User not found'
-        }), 404
+        return jsonify({'error': 'User not found'}), 404
     
     if not check_password_hash(user['password'], password):
-        return jsonify({
-            'error': 'Incorrect password'
-        }), 401
+        return jsonify({'error': 'Incorrect password'}), 401
 
     return jsonify({
-        'status': 'received', 
-        'user': {
-            'email': email,
-            'password': password,
-            },
-        'message': 'Login request received successfully'
-        }), 201
+        'status': 'received',
+        'user': {'email': email},
+        'message': 'Login successful',
+        'redirect': '/dashboard'
+    }), 200

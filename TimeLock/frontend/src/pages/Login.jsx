@@ -25,11 +25,13 @@ export default function Login(){
             }
 
             const data = await res.json()
+            navigate(data.redirect)
+
             console.log(`Server response: ${data}`)
             setStatus("Signup sent ✔");
 
         } catch (err) {
-            console.error(`Signup error: ${err}`)
+            console.error(`Login error: ${err}`)
             setStatus(`Error: ${err.message}`)
         }
     }
